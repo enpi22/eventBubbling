@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Bubbling Example</title>
+  <style>
+    .grandpa {
+      padding: 20px;
+      border: 1px solid rgb(33, 218, 202);
+    }
+    .parent {
+      padding: 20px;
+      border: 1px solid black;
+    }
+    .child {
+      padding: 10px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div class="grandpa" id="grandpa">
+    Grandparents Element
+    <div class="parent" id="parent">
+        Parent Element
+        <div class="child" id="child">
+          Child Element
+        </div>
+      </div>
+  </div>
+  <h2>List of Items</h2>
+  <ul id="itemList">
+    <li>
+      Item 1 <button class="actionBtn" data-itemId="1">Action</button>
+    </li>
+    <li>
+      Item 2 <button class="actionBtn" data-itemId="2">Action</button>
+    </li>
+ 
+  </ul>
+
+  <script>
+    document.getElementById('itemList').addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('actionBtn')) {
+        const itemId = target.dataset.itemId; 
+        console.log(`Button clicked for item with ID: ${itemId}`);
+      }
+    });
+  </script>
+  
+  <script>
+    const grandpa = document.getElementById('grandpa');
+    const parent = document.getElementById('parent');
+    const child = document.getElementById('child');
+
+    grandpa.addEventListener('click', function(event) {
+      console.log('Grandparent clicked');
+    }, true);
+    
+    parent.addEventListener('click', function(event) {
+      console.log('Parent clicked');
+    }, true);
+    
+    child.addEventListener('click', function(event) {
+      console.log('Child clicked');
+    }, true);
+  </script>
+</body>
+</html>
+
